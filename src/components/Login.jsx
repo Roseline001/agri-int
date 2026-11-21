@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth'
 import { auth, googleProvider } from '../firebase'
 
-function Login() {
+function Login({onSwitch}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -97,7 +97,10 @@ function Login() {
           </button>
 
           <p className="text-sm text-center mt-5 text-gray-600">
-            Don't have an account? <a href="/register" className="text-green-700 font-semibold">Create one</a>
+            Don't have an account? {' '}
+            <button type="button" onClick={onSwitch} className="text-[#2F4A3A] underline">
+                Create one
+            </button>
           </p>
 
         </form>
