@@ -1,7 +1,10 @@
 
 import { useState } from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase'
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup
+} from 'firebase/auth'
+import { auth, googleProvider } from '../firebase'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -14,7 +17,15 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password)
     } catch (error) {
-      setError('Login failed. Please check your details.')
+      setError('Wrong email or password. Try again.')
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider)
+    } catch (error) {
+      setError('Google sign-in failed. Try again.')
     }
   }
 
@@ -24,7 +35,7 @@ function Login() {
       {/* Left sidebar */}
       <div className="w-1/3 bg-[#ffffff] text-[#233027] flex flex-col items-left justify-start p-4">
         <h1 className="text-3xl font-bold mb-0">AgriCheck</h1>
-        <p className="text-[#6F9F78] text-xs" >
+        <p className="text-[#6F9F78] text-xs">
           AGRICULTURAL INTELLIGENCE
         </p>
       </div>
@@ -69,6 +80,20 @@ function Login() {
             className="bg-[#326B43] text-white p-3 w-full rounded hover:bg-[#245C3A]"
           >
             Sign in
+          </button>
+
+          <div className="flex items-center gap-3 my-4">
+            <hr className="flex-1" />
+            <span className="text-gray-400 text-sm">OR</span>
+            <hr className="flex-1" />
+          </div>
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="border border-gray-300 text-[#26352B] p-3 w-full rounded hover:bg-gray-50"
+          >
+            Continue with Google
           </button>
 
           <p className="text-sm text-center mt-5 text-gray-600">
