@@ -8,4 +8,19 @@ async function getWeather(lat, lon) {
     return response.json()
 }
 
-export { getWeather }
+async function getMonthRain(lat, lon, year, month) {
+    const lastDay = new Date(year, month, 0).getDate()
+    const monthText = String(month).padStart(2, '0')
+    const start = `${year}-${monthText}-01`
+    const end = `${year}-${monthText}-${lastDay}`
+
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${start}&end_date=${end}&daily=precipitation_sum&timezone=auto`
+    const response = await fetch(url)
+
+    if (!response.ok) {
+        throw new Error('Rain history request failed')
+    }
+    return response.json()
+}
+
+export { getWeather, getMonthRain }

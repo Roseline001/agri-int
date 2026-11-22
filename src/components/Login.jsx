@@ -32,7 +32,7 @@ function Login({onSwitch}) {
     return (
         <div className="min-h-screen flex bg-[#F5F8F2]">
 
-            <div className="w-1/3 bg-[#ffffff] text-[#233027] flex flex-col items-left justify-start p-4">
+            <div className="w-60 bg-white border-r border-[#DFE5DC] text-[#233027] flex flex-col p-6">
                 <h1 className="text-3xl font-bold mb-0">AgriCheck</h1>
                 <p className="text-[#6F9F78] text-xs">
                     AGRICULTURAL INTELLIGENCE
