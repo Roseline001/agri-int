@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import { getWeather } from '../api/weather'
 import { plots } from '../data/plots'
 import Card from './Card'
+import FarmMap from './FarmMap'
 
 function getGreeting() {
     const hour = new Date().getHours()
@@ -17,7 +18,7 @@ function Dashboard() {
     const name = user.displayName || user.email
     const firstName = name.split(' ')[0]
 
-    const plot = plots[0]
+    const [plot, setPlot] = useState(plots[0])
     const [weather, setWeather] = useState(null)
     const [error, setError] = useState('')
 
@@ -26,6 +27,12 @@ function Dashboard() {
             .then((data) => setWeather(data))
             .catch(() => setError('Could not load the weather. Check your connection.'))
     }, [plot])
+
+    function handleSelect(newPlot) {
+        setPlot(newPlot)
+        setWeather(null)
+        setError('')
+    }
 
     return (
         <div className="flex min-h-screen bg-[#F2F5F0]">
@@ -59,6 +66,12 @@ function Dashboard() {
                     </div>
                 </>
             )}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
+                <section className="lg:col-span-2">
+                    <h3 className="text-lg font-semibold text-[#2F4A3A] mb-3">Plots map</h3>
+                    <FarmMap plots={plots} selectedId={plot.id} onSelect={handleSelect} />
+                </section>
+            </div>
         </main>
     </div>
   )
