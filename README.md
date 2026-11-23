@@ -1,16 +1,50 @@
-# React + Vite
+# AgriCheck
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Agricultural intelligence:** a React app to check the weather on farm plots and get simple irrigation advice.
 
-Currently, two official plugins are available:
+Live site: https://roseline001.github.io/agri-int/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About
 
-## React Compiler
+Farming in Kenya depends on rain. AgriCheck shows live weather for four farming areas (Kitale, Machakos, Kericho and Nyeri) and gives simple irrigation advice based on the rain of the last 7 days and the next 3 days.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Register and log in with email and password, or with Google
+- Live temperature, rainfall, humidity and wind for each plot
+- Satellite map of the plots; click a plot to open it
+- Search conditions: filter by region, maximum temperature and minimum humidity, and pick a month to see last year's rain
+- Weekly rain bars and irrigation advice for each plot
+- Locations page with every plot and its advice
+- Remembers the last plot you looked at
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech stack
+
+- React + Vite
+- Tailwind CSS
+- Firebase Authentication
+- Open-Meteo API (Fetch API)
+- react-leaflet
+- Vitest + React Testing Library
+- Figma (design)
+- GitHub Pages (deployment)
+
+## React concepts used
+
+useState, useEffect, useContext, props, conditional rendering, Fetch API
+
+## Run it locally
+
+npm install
+npm run dev
+
+## Tests
+
+npm test
+npm run coverage
+
+Coverage: about 77% of statements.
+
+## Author
+
+Roseline: https://github.com/Roseline001
