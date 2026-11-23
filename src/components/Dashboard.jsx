@@ -37,19 +37,16 @@ function Dashboard() {
     const [filters, setFilters] = useState(defaultFilters)
     const [monthRain, setMonthRain] = useState(null)
 
-    // get the weather for all four plots once, when the dashboard opens
     useEffect(() => {
         Promise.all(plots.map((p) => getWeather(p.lat, p.lon)))
             .then((results) => setWeatherList(results))
-            .catch(() => setError('Could not load the weather. Check your connection.'))
+            .catch(() => setError('Could not load the weather, Check your connection.'))
     }, [])
 
-    // remember the last plot the user looked at
     useEffect(() => {
         localStorage.setItem(storageKey, plot.id)
     }, [plot, storageKey])
 
-    // when a month is picked in Search conditions, get last year's rain for that month
     useEffect(() => {
         if (!filters.month) return
         getMonthRain(plot.lat, plot.lon, lastYear, filters.month)
@@ -57,12 +54,10 @@ function Dashboard() {
             .catch(() => setMonthRain(null))
     }, [plot, filters.month, lastYear])
 
-    // weatherList is in the same order as plots
     function weatherFor(p) {
         return weatherList[plots.indexOf(p)]
     }
 
-    // used by the Locations page: pick the plot and go back to the dashboard
     function openPlot(p) {
         setPlot(p)
         setPage('dashboard')
@@ -72,7 +67,6 @@ function Dashboard() {
     const rainPast7 = weather ? sumRain(weather.daily.precipitation_sum.slice(0, 7)) : 0
     const rainNext3 = weather ? sumRain(weather.daily.precipitation_sum.slice(7)) : 0
 
-    // only keep the plots that match the search conditions
     const visiblePlots = plots.filter((p) => {
         const w = weatherFor(p)
         if (filters.region !== 'All regions' && p.region !== filters.region) return false
@@ -105,23 +99,23 @@ function Dashboard() {
                     <>
                         <div className="flex gap-2 mt-6">
                             <span className="bg-white border border-[#DFE5DC] rounded-full px-3 py-1 text-xs text-[#2F4A3A]">
-                                <span className="text-[#5E7D67]">●</span> Live · Open-Meteo
+                                <span className="text-[#5E7D67]">●</span> Live 
                             </span>
                             <span className="bg-white border border-[#DFE5DC] rounded-full px-3 py-1 text-xs text-[#2F4A3A]">
-                                Plot: {plot.name} · {plot.crop}
+                                Area: {plot.name} · {plot.crop}
                             </span>
                         </div>
 
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                            <Card label="Temperature" value={weather.current.temperature_2m} unit="°C" caption="Measured now" />
-                            <Card label="Rainfall" value={weather.current.precipitation} unit="mm" caption="In the last hour" />
-                            <Card label="Relative humidity" value={weather.current.relative_humidity_2m} unit="%" caption="Moisture in the air" />
-                            <Card label="Wind" value={weather.current.wind_speed_10m} unit="km/h" caption="At 10 m height" />
+                            <Card label="Temperature" value={weather.current.temperature_2m} unit="°C" caption="" />
+                            <Card label="Rainfall" value={weather.current.precipitation} unit="mm" caption="" />
+                            <Card label="Relative humidity" value={weather.current.relative_humidity_2m} unit="%" caption="" />
+                            <Card label="Wind" value={weather.current.wind_speed_10m} unit="km/h" caption="" />
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
                             <section className="lg:col-span-2">
-                                <h3 className="text-lg font-semibold text-[#2F4A3A] mb-3">Results map</h3>
+                                <h3 className="text-lg font-semibold text-[#2F4A3A] mb-3">Areas map</h3>
                                 <FarmMap plots={visiblePlots} selected={plot} onSelect={setPlot} />
                                 {visiblePlots.length === 0 && (
                                     <p className="text-sm text-[#7A4E22] mt-2">
@@ -135,7 +129,6 @@ function Dashboard() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
                             <section className="lg:col-span-2">
-                                <h3 className="text-lg font-semibold text-[#2F4A3A] mb-3">Weekly analytics</h3>
                                 {filters.month && monthRain ? (
                                     <WeeklyRain
                                         title={`Rain in ${months[filters.month - 1]} ${lastYear} · ${plot.name}`}
@@ -152,7 +145,6 @@ function Dashboard() {
                             </section>
 
                             <aside>
-                                <h3 className="text-lg font-semibold text-[#2F4A3A] mb-3">Plot details</h3>
                                 <IrrigationAdvice rainPast7={rainPast7} rainNext3={rainNext3} />
                             </aside>
                         </div>

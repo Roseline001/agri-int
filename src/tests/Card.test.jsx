@@ -4,7 +4,6 @@ import Card from '../components/Card'
 describe('Card', () => {
   it('shows the label, value, unit and caption', () => {
     render(<Card label="Temperature" value={24.3} unit="°C" caption="Measured now" />)
-
     expect(screen.getByText('Temperature')).toBeInTheDocument()
     expect(screen.getByText('24.3')).toBeInTheDocument()
     expect(screen.getByText('°C')).toBeInTheDocument()
