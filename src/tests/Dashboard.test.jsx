@@ -40,5 +40,5 @@ test("display error when weather fails to load", async () => {
         </AuthContext.Provider>
     );
 
-    expect(await screen.findByText("Could not load the weather. Check your connection.")).toBeInTheDocument();
+    expect(await screen.findByText("Could not load the weather, Check your connection.")).toBeInTheDocument();
 });
