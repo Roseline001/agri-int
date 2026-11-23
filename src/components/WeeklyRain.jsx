@@ -14,7 +14,7 @@ function WeeklyRain({ title, days, amounts }) {
   return (
     <div className="bg-white border border-[#DFE5DC] rounded-2xl p-5">
       <h3 className="text-lg font-semibold text-[#2F4A3A]">{title}</h3>
-      <p className="text-xs text-[#6B7A70]">Daily rainfall in mm · Open-Meteo</p>
+      <p className="text-xs text-[#6B7A70]">Daily rainfall in mm</p>
 
       <div className="flex gap-1 mt-6">
         {cleanAmounts.map((mm, index) => (

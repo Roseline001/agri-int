@@ -4,7 +4,7 @@ function Locations({ plots, weatherFor, onOpen }) {
     return (
         <div className="mt-8">
             <h3 className="text-lg font-semibold text-[#2F4A3A]">Your plots</h3>
-            <p className="text-sm text-[#6B7A70]">Click a plot to open it on the dashboard</p>
+            <p className="text-sm text-[#6B7A70]">Clicking an area to opens it on the dashboard</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 {plots.map((plot) => {

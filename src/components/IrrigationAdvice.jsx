@@ -24,7 +24,7 @@ function IrrigationAdvice({ rainPast7, rainNext3 }) {
             </div>
 
             <p className="text-xs text-[#6B7A70] mt-4">
-                Advice note: this comes from a simple rain rule, not an agronomist. Check your soil too.
+                Advice note: Check your soil too.
             </p>
         </div>
     )
